@@ -58,11 +58,7 @@ def main():
 
 	# Custom dataloaders
 	train_dataset = SRDataset(data_folder,
-							  split='train',
-							  crop_size=crop_size,
-							  scaling_factor=scaling_factor,
-							  lr_img_type='imagenet-norm',
-							  hr_img_type='[-1, 1]')
+		split='train', crop_size=crop_size, scaling_factor=scaling_factor, lr_img_type='imagenet-norm', hr_img_type='[-1, 1]')
 	train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True,
 											   num_workers=workers, pin_memory=True)  
 
@@ -141,35 +137,3 @@ def train(train_loader, model, criterion, optimizer, epoch):
 
 if __name__ == '__main__':
 	main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

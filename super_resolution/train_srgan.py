@@ -99,12 +99,7 @@ def main():
 	adversarial_loss_criterion = adversarial_loss_criterion.to(device)
 
 	# Custom dataloaders
-	train_dataset = SRDataset(data_folder,
-							  split='train',
-							  crop_size=crop_size,
-							  scaling_factor=scaling_factor,
-							  lr_img_type='imagenet-norm',
-							  hr_img_type='imagenet-norm')
+	train_dataset = SRDataset(data_folder, split='train', crop_size=crop_size, scaling_factor=scaling_factor, lr_img_type='imagenet-norm', hr_img_type='imagenet-norm')
 	train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True, 
 											   num_workers=workers, pin_memory=True)
 
