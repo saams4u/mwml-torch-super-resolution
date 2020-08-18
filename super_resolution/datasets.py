@@ -40,11 +40,9 @@ class SRDataset(Dataset):
 				self.images = json.load(j)
 
 		# Select the correct set of transforms
-		self.transform = ImageTransforms(split=self.split,
-										 crop_size=self.crop_size,
-										 scaling_factor=self.scaling_factor,
-										 lr_img_type=self.lr_img_type,
-										 hr_img_type=self.hr_img_type)
+		self.transform = ImageTransforms(split=self.split, crop_size=self.crop_size,
+			scaling_factor=self.scaling_factor, lr_img_type=self.lr_img_type,
+			hr_img_type=self.hr_img_type)
 
 	def __getitem__(self, i):
 		img = Image.open(self.images[i], mode='r')
