@@ -47,7 +47,6 @@ cudnn.benchmark = True
 
 
 def main():
-	
 	global start_epoch, epoch, checkpoint, srresnet_checkpoint
 
 	# Initialize model or load checkpoint
@@ -233,13 +232,7 @@ def train(train_loader, generator, discriminator, truncated_vgg19, content_loss_
 				  'Cont. Loss {loss_c.val:.4f} ({loss_c.avg:.4f})----'
 				  'Adv. Loss {loss_a.val:.4f} ({loss_a.avg:.4f})----'
 				  'Disc. Loss {loss_d.val:.4f} ({loss_d.avg:.4f})'.format(epoch,
-				  														  i,
-				  														  len(train_loader),
-				  														  batch_time=batch_time,
-				  														  data_time=data_time,
-				  														  loss_c=losses_c,
-				  														  loss_a=losses_a,
-				  														  loss_d=losses_d))
+				  	i, len(train_loader), batch_time=batch_time, data_time=data_time, loss_c=losses_c, loss_a=losses_a, loss_d=losses_d))
 
 	del lr_imgs, hr_imgs, sr_imgs, hr_imgs_in_vgg_space, sr_imgs_in_vgg_space, hr_discriminated, sr_discriminated  # free some memory since their histories may be stored
 

@@ -37,7 +37,6 @@ cudnn.benchmark = True
 
 
 def main():
-
 	global start_epoch, epoch, checkpoint
 
 	# Initialize model or load checkpoint
@@ -135,11 +134,7 @@ def train(train_loader, model, criterion, optimizer, epoch):
 				  'Batch Time {batch_time.val:.3f} ({batch_time.avg:.3f})----'
 				  'Data Time {data_time.val:.3f} ({data_time.avg:.3f})----'
 				  'Loss {loss.val:.4f} ({loss.avg:.4f})'.format(epoch,
-	  														    i,
-	  														    len(train_loader),
-	  														    batch_time=batch_time,
-	  														    data_time=data_time,
-	  														    loss=losses))
+	  				i, len(train_loader), batch_time=batch_time, data_time=data_time, loss=losses))
 
 	del lr_imgs, hr_imgs, sr_imgs  # free some memory since their histories may be stored
 
