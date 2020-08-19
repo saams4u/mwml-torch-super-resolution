@@ -7,8 +7,10 @@ from datasets import SRDataset
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Data
-data_folder = "../input_data"
-test_data_names = ["Set5", "Set14", "BSD100"]
+# data_folder = "../input_data"
+# test_data_names = ["Set5", "Set14", "BSD100"]
+data_folder = '../output_lists'
+test_data_names = ["image_SRF_4"]
 
 # Model checkpoints
 srgan_checkpoint = "./checkpoint_srgan.pth.tar"

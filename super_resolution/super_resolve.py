@@ -45,7 +45,7 @@ def visualize_sr(img, halve=False):
 	# Font
 	draw = ImageDraw.Draw(grid_img)
 	try:
-		font = ImageFont.truetype("../resources/fonts/calibril.tff", size=23)
+		font = ImageFont.truetype("../resources/fonts/calibril.ttf", size=23)
 		# Otherwise, use any TTF font of your choice
 	except OSError:
 		print(
