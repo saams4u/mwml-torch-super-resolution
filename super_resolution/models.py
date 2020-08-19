@@ -32,7 +32,7 @@ class ConvolutionalBlock(nn.Module):
 		if activation == 'prelu':
 			layers.append(nn.PReLU())
 		elif activation == 'leakyrelu':
-			layers.append(nn.LeakyRelu(0.2))
+			layers.append(nn.LeakyReLU(0.2))
 		elif activation == 'tanh':
 			layers.append(nn.Tanh())
 
@@ -118,7 +118,7 @@ class SRResNet(nn.Module):
 
 		# The last convolutional block
 		self.conv_block3 = ConvolutionalBlock(in_channels=n_channels, out_channels=3, kernel_size=large_kernel_size,
-											  batch_norm=False, activation='Tanh')
+											  batch_norm=False, activation='tanh')
 
 	def forward(self, lr_imgs):
 		output = self.conv_block1(lr_imgs)  # (N, 3, w, h)
@@ -179,7 +179,7 @@ class Discriminator(nn.Module):
 
 		self.fc1 = nn.Linear(out_channels * 6 * 6, fc_size)
 
-		self.leaky_relu = nn.LeakyRelu(0.2)
+		self.leaky_relu = nn.LeakyReLU(0.2)
 
 		self.fc2 = nn.Linear(1024, 1)
 
