@@ -1,13 +1,11 @@
 import os
-from fastapi import FastAPI
-from fastapi import Path
+import json
+import config, utils
+
+from pydantic import BaseModel
+from fastapi import FastAPI, Path
 from fastapi.responses import RedirectResponse
 from http import HTTPStatus
-import json
-from pydantic import BaseModel
-
-from super_resolution import config
-from super_resolution import utils
 
 
 app = FastAPI(
