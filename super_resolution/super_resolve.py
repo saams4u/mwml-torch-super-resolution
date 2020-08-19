@@ -85,4 +85,4 @@ def visualize_sr(img, halve=False):
 
 
 if __name__ == '__main__':
-	grid_img = visualize_sr("../input_data/Set14_SR/Set14/image_SRF_4/img_001_SRF_4_LR.png")
+	grid_img = visualize_sr("../input_data/Set14/image_SRF_4/img_001_SRF_4_LR.png")

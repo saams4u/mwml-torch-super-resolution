@@ -9,7 +9,7 @@ from torch import nn
 
 class ConvolutionalBlock(nn.Module):
 
-	def __init__(self, in_channels, kernel_size, stride=1, batch_norm=False, activation=None):
+	def __init__(self, in_channels, out_channels, kernel_size, stride=1, batch_norm=False, activation=None):
 		super(ConvolutionalBlock, self).__init__()
 
 		if activation is not None:

@@ -29,7 +29,7 @@ def create_data(train_folders, test_folders, min_size, output_folder):
     train_images = list()
     for d in train_folders:
         for i in os.listdir(d):
-            image_path = os.path.join(d, i)
+            img_path = os.path.join(d, i)
             img = Image.open(img_path, mode='r')
             if img.width >= min_size and img.height >= min_size:
                 train_images.append(img_path)
