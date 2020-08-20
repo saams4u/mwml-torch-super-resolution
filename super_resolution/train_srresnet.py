@@ -38,6 +38,7 @@ cudnn.benchmark = True
 
 
 def main():
+	
 	global start_epoch, epoch, checkpoint
 
 	# Initialize model or load checkpoint

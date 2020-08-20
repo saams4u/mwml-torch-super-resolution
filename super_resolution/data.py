@@ -1,6 +1,6 @@
+from six.moves import urllib
 from os.path import exists, join, basename
 from os import makedirs, remove
-from six.moves import urllib
 
 from torchvision.transforms import Compose, CenterCrop, ToTensor, Resize
 from datasets import DatasetFromFolder
@@ -9,7 +9,7 @@ import tarfile
 
 
 def download_bsd300(dest="dataset"):
-	output_image_dir = join(dest, "BSDS300/images")
+	output_image_dir = join(dest, "../input_data/BSDS300/images")
 
 	if not exists(output_image_dir):
 		makedirs(dest)
@@ -49,6 +49,16 @@ def target_transform(crop_size):
 		CenterCrop(crop_size),
 		ToTensor(),
 	])
+
+
+def get_train_set(upscale_factor):
+	root_dir = download_bsd300()
+	test_dir = join(root_dir, "train")
+	crop_size = calculate_valid_crop_size(256, upscale_factor)
+
+	return DatasetFromFolder(train_dir,
+							 input_transform=input_transform(crop_size, upscale_factor),
+							 target_transform=target_transform(crop_size))
 
 
 def get_test_set(upscale_factor):

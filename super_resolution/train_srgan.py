@@ -48,6 +48,7 @@ cudnn.benchmark = True
 
 
 def main():
+	
 	global start_epoch, epoch, checkpoint, srresnet_checkpoint
 
 	# Initialize model or load checkpoint
