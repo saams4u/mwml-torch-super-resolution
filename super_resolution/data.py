@@ -9,7 +9,7 @@ import tarfile
 
 
 def download_bsd300(dest="dataset"):
-	output_image_dir = join(dest, "../input_data/BSDS300/images")
+	output_image_dir = join(dest, "../input_data/BSDS300")
 
 	if not exists(output_image_dir):
 		makedirs(dest)
@@ -53,7 +53,7 @@ def target_transform(crop_size):
 
 def get_train_set(upscale_factor):
 	root_dir = download_bsd300()
-	test_dir = join(root_dir, "train")
+	test_dir = join(root_dir, "bsd300_train")
 	crop_size = calculate_valid_crop_size(256, upscale_factor)
 
 	return DatasetFromFolder(train_dir,
@@ -63,7 +63,7 @@ def get_train_set(upscale_factor):
 
 def get_test_set(upscale_factor):
 	root_dir = download_bsd300()
-	test_dir = join(root_dir, "test")
+	test_dir = join(root_dir, "bsd300_test")
 	crop_size = calculate_valid_crop_size(256, upscale_factor)
 
 	return DatasetFromFolder(test_dir,

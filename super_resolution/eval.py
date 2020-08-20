@@ -4,40 +4,60 @@ from utils import *
 from skimage.metrics import peak_signal_noise_ratio, structural_similarity
 from datasets import SRDataset
 
+from data import get_test_set
+from models import Net
+
+from opt_for_train import *
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Data
-# data_folder = "../input_data"
-# test_data_names = ["Set5", "Set14", "BSD100"]
-data_folder = '../output_lists'
-test_data_names = ["image_SRF_4"]
+data_folder = "../output_lists"
+test_data_names = ["bsds300_test"]
 
-# Model checkpoints
-srgan_checkpoint = "./checkpoint_srgan.pth.tar"
-srresnet_checkpoint = "./checkpoint_srresnet.pth.tar"
+# data_folder = '../output_lists'
+# test_data_names = ["image_SRF_4"]
 
-# Load model, either the SRResNet or the SRGAN
+# Static Model checkpoints
+net_checkpoint = "./model_net_34.pth"
+srgan_checkpoint = "./model_srgan.pth.tar"
+srresnet_checkpoint = "./model_srresnet.pth.tar"
+
+## => Load model, Net, SRResNet or SRGAN
+net = torch.load(net_checkpoint)['model'].to(device)
+net.eval()
+model = net
+
 # srresnet = torch.load(srresnet_checkpoint)['model'].to(device)
 # srresnet.eval()
 # model = srresnet
-srgan_generator = torch.load(srgan_checkpoint)['generator'].to(device)
-srgan_generator.eval()
-model = srgan_generator
+
+# srgan_generator = torch.load(srgan_checkpoint)['generator'].to(device)
+# srgan_generator.eval()
+# model = srgan_generator
 
 # Evaluate
 for test_data_name in test_data_names:
 	print("\nFor %s:\n" % test_data_name)
 
-	# Custom dataloader
-	test_dataset = SRDataset(data_folder,
-							 split='test',
-							 crop_size=0,
-							 scaling_factor=4,
-							 lr_img_type='imagenet-norm',
-							 hr_img_type='[-1, 1]',
-							 test_data_name=test_data_name)
-	test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=1, shuffle=False, num_workers=4,
-											  pin_memory=True)
+	## => Custom dataloaders for 
+	# test_dataset = SRDataset(data_folder,
+	# 						 split='test',
+	# 						 crop_size=0,
+	# 						 scaling_factor=4,
+	# 						 lr_img_type='imagenet-norm',
+	# 						 hr_img_type='[-1, 1]',
+	# 						 test_data_name=test_data_name)
+	# test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=1, shuffle=False, num_workers=4,
+	# 										  pin_memory=True)
+
+	test_dataset = get_test_set(TrainingOptions.upscale_factor)
+
+	test_loader = DataLoader(
+		dataset=test_dataset,
+		num_workers=DeviceOptions.threads,
+		batch_size=DeviceOptions.testBatchSize,
+		shuffle=False)
 
 	# Keep track of the PSNRs and the SSIMs across batches
 	PSNRs = AverageMeter()

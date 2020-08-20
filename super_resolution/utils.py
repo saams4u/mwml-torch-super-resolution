@@ -46,7 +46,7 @@ def create_data(train_folders, test_folders, min_size, output_folder):
             if img.width >= min_size and img.height >= min_size:
                 test_images.append(img_path)
         print("There are %d images in the %s test data.\n" % (len(test_images), test_name))
-        with open(os.path.join(output_folder, test_name + '_test_images.json'), 'w') as j:
+        with open(os.path.join(output_folder, test_name + '_images.json'), 'w') as j:
             json.dump(test_images, j)
 
     print("JSONS containing lists of Train and Test images have been saved to %s\n" % output_folder)
