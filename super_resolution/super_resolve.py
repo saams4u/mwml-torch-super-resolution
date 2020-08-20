@@ -22,9 +22,7 @@ parser.add_argument('--model', type=str, default='model_net_{opt.n_epoch}.pth', 
 # parser.add_argument('--model', type=str, default='model_srgan_{opt.n_epoch}.pth.tar', required=False, help='model file to use')
 # parser.add_argument('--model', type=str, default='model_srresnet_{opt.n_epoch}.pth.tar', required=False, help='model file to use')
 
-parser.add_argument('--output_filename', default='../resources/images/{opt.net}_{opt.input_image}', type=str, help='where to save the output image')
-# parser.add_argument('--output_filename', default='../resources/images/{opt.srgan}_{opt.input_image}', type=str, help='where to save the output image')
-# parser.add_argument('--output_filename', default='../resources/images/{opt.srresnet}_{opt.input_image}', type=str, help='where to save the output image')
+parser.add_argument('--output_filename', default='../resources/images/{opt.model}_{opt.input_image}', type=str, help='where to save the output image')
 
 print(opt)
 
@@ -33,8 +31,6 @@ img = Image.open(opt.input_image).convert('YCbCr')
 y, cb = cr = img.split()
 
 model = torch.load(opt.model)
-# model = torch.load(opt.srgan)
-# model = torch.load(opt.srresnet)
 
 img_to_tensor = ToTensor()
 input = img_to_tensor(y).view(1, -1, y.size[1], y.size[0])
@@ -57,9 +53,7 @@ out_img_cr = cr.resize(out_img_y.size, Image.BICUBIC)
 out_img = Image.merge('YCbCr', [out_img_y, out_img_cb, out_img_cr]).convert('RGB')
 out_img.save(opt.output_filename)
 
-print('output image from Net model saved to ', opt.output_filename)
-# print('output image from SRResNet model saved to ', opt.output_filename)
-# print('output image from SRGAN model saved to ', opt.output_filename)
+print('output image saved to ', opt.output_filename)
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -68,14 +62,14 @@ srgan_checkpoint = "./model_srgan.pth.tar"
 srresnet_checkpoint = "./model_srresnet.pth.tar"
 
 # Load models
-# net = torch.load(opt.net)['model'].to(device)
+# net = torch.load(opt.model)['model'].to(device)
 # net.eval()
 
-# srresnet = torch.load(opt.srresnet)['model'].to(device)
+# srresnet = torch.load(opt.model)['model'].to(device)
 srresnet = torch.load(srresnet_checkpoint)['model'].to(device)
 srresnet.eval()
 
-# srgan_generator = torch.load(opt.srgan)['generator'].to(device)
+# srgan_generator = torch.load(opt.model)['generator'].to(device)
 srgan_generator = torch.load(srgan_checkpoint)['generator'].to(device)
 srgan_generator.eval()
 
