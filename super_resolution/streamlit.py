@@ -27,21 +27,21 @@ st.code(f"Using: upscale={training_opts.upscale_factor}x, "
 model = load_model(training_opts, device_opts)
 
 
-# => Set device as either CUDA or CPU
-	# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+## => Set device as either CUDA or CPU
+# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# => Model checkpoints
-	# srgan_checkpoint = "./checkpoint_srgan.pth.tar"
-	# srresnet_checkpoint = "./checkpoint_srresnet.pth.tar"
+## => Model checkpoints
+# srgan_checkpoint = "./checkpoint_srgan.pth.tar"
+# srresnet_checkpoint = "./checkpoint_srresnet.pth.tar"
 
-# => Load model, either the SRResNet or the SRGAN
-	# srresnet = torch.load(srresnet_checkpoint)['model'].to(device)
-	# srresnet.eval()
-	# model = srresnet
+## => Load model, either the SRResNet or the SRGAN
+# srresnet = torch.load(srresnet_checkpoint)['model'].to(device)
+# srresnet.eval()
+# model = srresnet
 
-	# srgan_generator = torch.load(srgan_checkpoint)['generator'].to(device)
-	# srgan_generator.eval()
-	# model = srgan_generator
+# srgan_generator = torch.load(srgan_checkpoint)['generator'].to(device)
+# srgan_generator.eval()
+# model = srgan_generator
 
 
 input_image = st.file_uploader("Upload an image", ["png", "jpg"], encoding=None)

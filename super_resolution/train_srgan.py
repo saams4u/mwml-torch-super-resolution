@@ -9,7 +9,6 @@ from models import Generator, Discriminator, TruncatedVGG19
 from datasets import SRDataset
 from utils import *
 
-
 # Data parameters
 data_folder = '../output_lists'  # folder with JSON data files
 crop_size = 96  # crop size of target HR images
@@ -20,7 +19,7 @@ large_kernel_size_g = 9  # kernel size of the first and last convolutions which 
 small_kernel_size_g = 3  # kernel size of all convolutions in-between, i.e. those in the residual and subpixel convolutional blocks
 n_channels_g = 64  # number of channels in-between, i.e. the input and output channels for the residual and subpixel convolutional blocks
 n_blocks_g = 16  # number of residual blocks
-srresnet_checkpoint = "./checkpoint_srresnet.pth.tar"  # file path of the trained SRResNet checkpoint used for initialization
+srresnet_checkpoint = "./model_srresnet.pth.tar"  # file path of the trained SRResNet checkpoint used for initialization
 
 # Discriminator parameters 
 kernel_size_d = 3  # kernel size in all convolutional blocks
@@ -133,7 +132,7 @@ def main():
 					'discriminator': discriminator,
 					'optimizer_g': optimizer_g,
 					'optimizer_d': optimizer_d},
-					'checkpoint_srgan.pth.tar')
+					'model_srgan_{epoch}.pth.tar')
 
 
 def train(train_loader, generator, discriminator, truncated_vgg19, content_loss_criterion, adversarial_loss_criterion,

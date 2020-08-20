@@ -38,7 +38,7 @@ cudnn.benchmark = True
 
 
 def main():
-	
+
 	global start_epoch, epoch, checkpoint
 
 	# Initialize model or load checkpoint
@@ -80,7 +80,7 @@ def main():
 		torch.save({'epoch': epoch,
 					'model': model,
 					'optimizer': optimizer},
-					'checkpoint_srresnet.pth.tar')
+					'model_srresnet_{epoch}.pth.tar')
 
 
 def train(train_loader, model, criterion, optimizer, epoch):
