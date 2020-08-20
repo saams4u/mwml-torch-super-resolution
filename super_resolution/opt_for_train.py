@@ -18,8 +18,7 @@ from torchvision.transforms import ToTensor
 
 from app_cache import AppCache
 from data import get_training_set, get_test_set
-from models import Net, SRResNet, Generator, Discriminator, TruncatedVGG19
-from datasets import SRDataset
+from models import Net
 
 
 model_cache = AppCache("trained_models")
