@@ -22,7 +22,7 @@ class DatasetFromFolder(Dataset):
 	
 	def __init__(self, img_dir, input_transform=None, target_transform=None):
 		super(DatasetFromFolder, self).__init__()
-		self.image_filenames = [os.path.join(img_dir, x) for x in os.listdir(image_dir) if is_image_file(x)]
+		self.image_filenames = [os.path.join(img_dir, x) for x in os.listdir(img_dir) if is_image_file(x)]
 
 		self.input_transform = input_transform
 		self.target_transform = target_transform

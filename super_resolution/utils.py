@@ -183,19 +183,6 @@ def adjust_learning_rate(optimizer, shrink_factor):
     print("The new learning rate is %f\n" % (optimizer.param_groups[0]['lr'],))
 
 
-def create_dirs(dirpath):
-    """Creating directories."""
-    if not os.path.exists(dirpath):
-        os.makedirs(dirpath)
-
-
-def load_json(filepath):
-    """Load a json file."""
-    with open(filepath, "r") as fp:
-        json_obj = json.load(fp)
-    return json_obj
-
-
 def save_dict(d, filepath):
     """Save dict to a json file."""
     with open(filepath, 'w') as fp:

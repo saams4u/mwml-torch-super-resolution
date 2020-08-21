@@ -16,7 +16,7 @@ parser.add_argument('--model', type=str, default='models/model_net_34.pth', requ
 # parser.add_argument('--model', type=str, default='checkpoint_srgan.pth.tar', required=False, help='model file to use')
 # parser.add_argument('--model', type=str, default='checkpoint_srresnet.pth.tar', required=False, help='model file to use')
 
-parser.add_argument('--output_filename', default='../resources/images/leon_output.png', type=str, help='where to save the output image')
+parser.add_argument('--output_filename', default='../resources/images/hr_leon.png', type=str, help='where to save the output image')
 
 opt = parser.parse_args()
 
@@ -36,7 +36,7 @@ if opt.cuda:
 	input = input.cuda()
 
 out = model(input)
-out= out.cpu()
+out = out.cpu()
 
 out_img_y = out[0].detach().numpy()
 out_img_y *= 255.0
