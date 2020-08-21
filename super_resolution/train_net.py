@@ -11,6 +11,11 @@ from torch.utils.data import DataLoader
 from models import Net
 from data import get_train_set, get_test_set
 
+import config, utils
+import wandb
+
+wandb.init(project="mwml-torch-super-resolution")
+
 
 # Training settings
 parser = argparse.ArgumentParser(description='PyTorch Super Res Example')
@@ -50,6 +55,8 @@ optimizer = optim.Adam(model.parameters(), lr=opt.lr)
 
 def train(epoch):
 	epoch_loss = 0
+	config.logger.info("Training:")
+
 	for iteration, batch in enumerate(training_data_loader, 1):
 		input, target = batch[0].to(device), batch[1].to(device)
 
@@ -58,6 +65,13 @@ def train(epoch):
 		epoch_loss += loss.item()
 		loss.backward()
 		optimizer.step()
+
+		config.logger.info(
+			f"Epoch: {epoch+1} | "
+			f"Loss: {loss.item():.4f}" ,
+			f"Avg. Loss: {(epoch_loss / len(training_data_loader)):.4f}")
+
+		wandb.log({"Avg. Loss": {(epoch_loss / len(training_data_loader))}})
 
 		print("===> Epoch[{}]({}/{}): Loss: {:.4f}".format(epoch, iteration, len(training_data_loader), loss.item()))
 
@@ -74,6 +88,14 @@ def test():
 			mse = criterion(prediction, target)
 			psnr = 10 * log10(1 / mse.item())
 			avg_psnr += psnr
+
+			config.logger.info(
+			f"MSE: {mse:.4f}" ,
+			f"PSNR: {psnr:.4f}",
+			f"Avg. PSNR dB: {(avg_psnr / len(testing_data_loader)):.4f}")
+
+			wandb.log({"Avg. PSNR dB": {(avg_psnr / len(testing_data_loader))}})
+	
 	print("===> Avg. PSNR: {:.4f} dB".format(avg_psnr / len(testing_data_loader)))
 
 

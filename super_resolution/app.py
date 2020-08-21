@@ -1,16 +1,23 @@
 import os
-import json
-import config, utils
+import sys
 
-from pydantic import BaseModel
+sys.path.append(".")
+
 from fastapi import FastAPI, Path
 from fastapi.responses import RedirectResponse
+
 from http import HTTPStatus
+from pydantic import BaseModel
+
+import wandb
+import json
+
+import config, data, eval, utils
 
 
 app = FastAPI(
     title="super_resolution",
-    description="",
+    description="PyTorch Super Resolution Using Made With ML",
     version="1.0.0",
 )
 
@@ -27,11 +34,11 @@ async def _index():
     return response
 
 
-class PredictPayload(BaseModel):
+class SuperResolvePayload(BaseModel):
     pass
 
 
 @utils.construct_response
-@app.post("/predict")
-async def _predict(payload: PredictPayload):
+@app.post("/super_resolve")
+async def _super_resolve(payload: SuperResolvePayload):
     pass
