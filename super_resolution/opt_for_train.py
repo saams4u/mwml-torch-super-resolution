@@ -17,11 +17,11 @@ from torch.utils.data import DataLoader
 from torchvision.transforms import ToTensor
 
 from app_cache import AppCache
-from data import get_training_set, get_test_set
+from data import get_train_set, get_test_set
 from models import Net
 
 
-model_cache = AppCache("trained_models")
+model_cache = AppCache("models")
 
 DeviceOptions = namedtuple('DeviceOptions', [
 	'cuda',
@@ -81,7 +81,7 @@ def train(training_opt: TrainingOptions, device_opt: DeviceOptions) -> Net:
 	device = torch.device("cuda" if device_opt.cuda else "cpu")
 
 	print('===> Loading datasets')
-	train_set = get_training_set(training_opt.upscale_factor)
+	train_set = get_train_set(training_opt.upscale_factor)
 	test_set = get_test_set(training_opt.upscale_factor)
 	
 	training_data_loader = DataLoader(
@@ -141,7 +141,7 @@ def train(training_opt: TrainingOptions, device_opt: DeviceOptions) -> Net:
 	return model
 
 
-def resize_native(input_image: Any, scale_factor: int) -> PIL.Image.Image:
+def resize_naive(input_image: Any, scale_factor: int) -> PIL.Image.Image:
 	img = open_image(input_image)
 	return img.resize((img.size[0] * scale_factor, img.size[1] * scale_factor), PIL.Image.ANTIALIAS)
 

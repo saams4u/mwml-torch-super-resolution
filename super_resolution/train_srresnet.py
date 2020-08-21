@@ -80,7 +80,7 @@ def main():
 		torch.save({'epoch': epoch,
 					'model': model,
 					'optimizer': optimizer},
-					'model_srresnet_{epoch}.pth.tar')
+					'model_srresnet.pth.tar')
 
 
 def train(train_loader, model, criterion, optimizer, epoch):

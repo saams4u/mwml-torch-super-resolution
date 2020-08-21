@@ -13,15 +13,15 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Data
 data_folder = "../output_lists"
-test_data_names = ["bsds300_test"]
+test_data_names = ["test"]
 
 # data_folder = '../output_lists'
 # test_data_names = ["image_SRF_4"]
 
 # Static Model checkpoints
-net_checkpoint = "./model_net_34.pth"
-srgan_checkpoint = "./model_srgan.pth.tar"
-srresnet_checkpoint = "./model_srresnet.pth.tar"
+net_checkpoint = "models/model_net_35.pth"
+srgan_checkpoint = "./checkpoint_srgan.pth.tar"
+srresnet_checkpoint = "./checkpoint_srresnet.pth.tar"
 
 ## => Load model, Net, SRResNet or SRGAN
 net = torch.load(net_checkpoint)['model'].to(device)

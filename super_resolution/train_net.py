@@ -1,5 +1,5 @@
-from math import log10
 from __future__ import print_function
+from math import log10
 
 import argparse
 
@@ -9,7 +9,7 @@ import torch.optim as optim
 
 from torch.utils.data import DataLoader
 from models import Net
-from data import get_training_set, get_test_set
+from data import get_train_set, get_test_set
 
 
 # Training settings
@@ -35,7 +35,7 @@ torch.manual_seed(opt.seed)
 device = torch.device("cuda" if opt.cuda else "cpu")
 
 print('===> Loading datasets')
-train_set = get_training_set(opt.upscale_factor)
+train_set = get_train_set(opt.upscale_factor)
 test_set = get_test_set(opt.upscale_factor)
 
 training_data_loader = DataLoader(dataset=train_set, num_workers=opt.threads, batch_size=opt.batchSize, shuffle=True)

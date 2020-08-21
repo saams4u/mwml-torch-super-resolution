@@ -132,7 +132,7 @@ def main():
 					'discriminator': discriminator,
 					'optimizer_g': optimizer_g,
 					'optimizer_d': optimizer_d},
-					'model_srgan_{epoch}.pth.tar')
+					'model_srgan.pth.tar')
 
 
 def train(train_loader, generator, discriminator, truncated_vgg19, content_loss_criterion, adversarial_loss_criterion,

@@ -1,6 +1,5 @@
 import streamlit as st
-
-from opt_for_train import TrainingOptions, DeviceOptions, load_model, open_image, super_resolve, resize_naive
+from opt_for_train import *
 
 
 st.sidebar.markdown("## Training Options")
@@ -17,8 +16,8 @@ st.sidebar.markdown("## Hardware Options")
 device_opts = DeviceOptions(
 	cuda=st.sidebar.checkbox('Use CUDA', value=False),
 	threads=st.sidebar.slider('Dataloader Threads', value=4, min_value=1, max_value=16),
-	batchSize=st.sidebar.slider('Training Batch Size', value=4, min_value=1, max_value=256),
-	testBatchSize=st.sidebar.slider('Testing Batch Size', value=100, min_value=1, max_value=256),
+	batchSize=st.sidebar.slider('Training Batch Size', value=32, min_value=1, max_value=256),
+	testBatchSize=st.sidebar.slider('Testing Batch Size', value=16, min_value=1, max_value=256),
 )
 
 st.code(f"Using: upscale={training_opts.upscale_factor}x, "
@@ -47,7 +46,7 @@ model = load_model(training_opts, device_opts)
 input_image = st.file_uploader("Upload an image", ["png", "jpg"], encoding=None)
 
 if input_image is None:
-	input_image = '../resources/images/leon.png'
+	input_image = 'https://github.com/tconkling/streamlit-enhance/raw/master/leon.png'
 
 st.image(open_image(input_image))
 
